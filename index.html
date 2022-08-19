@@ -22,7 +22,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"
         integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+    <!-- stylesheet -->
+    <link rel="stylesheet" href="./assets/css/style.css">
     <title>NoteApp</title>
 </head>
 
@@ -30,13 +31,34 @@
 
     <!-- main#site_main -->
     <main id="site_main">
+        <div class="container-xxl">
+            <div class="row">
+                <section id="notes_list" class="col-3 ">
+                    <header id="header_list">
+                        <h3><i class="fa-solid fa-book"></i> Nome Taccuino</h3>
+                        <div class="actions d-flex justify-content-between">
+                            <div class="notes_number">2 Note</div>
+                            <div class="buttons_action d-flex gap-2">
+                                <div class="button">
+                                    <i class="fa-solid fa-arrow-down-wide-short"></i>
+                                </div>
+                                <div class="button">
+                                    <i class="fa-solid fa-table-list"></i>
+                                </div>
+                                <div class="button">
+                                    <i class="fa-solid fa-ellipsis"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+                    <!-- /#header_list -->
+                </section>
+                <!-- /section#notes_list -->
 
-        <section id="notes_lit"></section>
-        <!-- /section#notes_list -->
-
-        <section id="note_edit"></section>
-        <!-- /section#note_edit -->
-
+                <section id="note_edit" class="col-9"></section>
+                <!-- /section#note_edit -->
+            </div>
+        </div>
     </main>
     <!-- /main#site_main -->
 

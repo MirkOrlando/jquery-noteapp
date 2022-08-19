@@ -1,0 +1,36 @@
+/* #region common */
+:root {
+    --bg-primary: #f8f8f8;
+    --secondary: #a6a6a6;
+}
+
+/* #endregion common */
+
+/* #region utilities */
+/* #endregion utilities */
+
+/* #region #notes_list */
+#notes_list {
+    height: 100vh;
+    background-color: var(--bg-primary);
+    border-right: 1px solid var(--secondary);
+}
+
+#notes_list .actions .buttons_action i {
+    color: var(--secondary);
+    transition: 250ms linear;
+}
+
+#notes_list .actions .buttons_action i:hover {
+    color: black;
+    cursor: pointer;
+}
+
+/* #endregion #notes_list */
+
+/* #region #note_edit */
+#note_edit {
+    height: 100vh;
+}
+
+/* #endregion #note_edit */
