@@ -2,11 +2,35 @@ const ckEditor = {
     editorInstance: {}
 }
 
+let timout = null;
+
 $(document).ready(function () {
     dayjs.locale('it')
     dayjs.extend(window.dayjs_plugin_utc);
 
     getAllNotes();
+
+    // change active note when click on a note
+    $(document).on('click', '.notes-menu__list__item', function () {
+        if (ckEditor.editorInstance.id) {
+            ckEditor.editorInstance.destroy();
+            ckEditor.editorInstance = {};
+        }
+        const activeNote = $(this);
+        activeNote.addClass('active').siblings().removeClass('active');
+        getNote(activeNote.data('id'))
+    })
+
+    // update note text
+    $(document).on('keyup', '#note_edit .note .ck-editor__main .ck-content', function () {
+        updateNote()
+    })
+
+    // update note title
+    $(document).on('keyup', '#note_edit .note .title', function () {
+        updateNote()
+    })
+
 });
 
 // (1) API Ajax
@@ -64,11 +88,8 @@ function printNotes(data, year) {
     const template = Handlebars.compile(source);
 
     data.forEach((note) => {
-        /* const fakeElement = $('<div></div>').append(note.text)
-        console.log(note);
-        console.log(fakeElement); */
-        const text = note.text.slice(0, 30) + '...'
-        //console.log(text);
+        const fakeElement = $('<div></div>').append(note.text)
+        const text = fakeElement.text().slice(0, 30) + '...'
         const context = { id: note.id, title: note.title, text, updatedAt: dayjs(note.updatedAt).format('DD MMMM YYYY') };
         const html = template(context);
         listNotesContainer.append(html)
@@ -110,4 +131,44 @@ function getNote(id) {
             console.log(error);
         }
     });
+}
+
+//(6) save update note
+function saveNote(note) {
+    note.updatedAt = dayjs.utc().format();
+    $.ajax({
+        type: "PUT",
+        data: note,
+        url: `https://62ff4cf39350a1e548db8783.mockapi.io/noteapp/api/v1/notes/${note.id}`,
+        success: function (response) {
+            updateNoteInMenu(response)
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
+}
+
+function updateNoteInMenu(data) {
+    const fakeElement = $('<div></div>').append(data.text)
+    const text = fakeElement.text().slice(0, 30) + '...'
+
+    $('.notes-menu__list__item.active .title').html(data.title)
+    $('.notes-menu__list__item.active .text').text(text)
+    $('.notes-menu__list__item.active .date').text(dayjs(data.updatedAt).format('DD MMMM YYYY'))
+    $('.update_date .date').text(dayjs(data.updatedAt).format('DD MMMM YYYY hh:mm:ss'))
+}
+
+function updateNote() {
+    const note = {
+        id: $('#editor').data('id'),
+        text: $('#note_edit .note .ck-editor__main .ck-content').html(),
+        title: $('#note_edit .note .title').val()
+    }
+
+    clearTimeout(timout)
+
+    timout = setTimeout(function () {
+        saveNote(note);
+    }, 1000);
 }

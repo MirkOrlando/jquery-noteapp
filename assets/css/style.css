@@ -226,4 +226,8 @@ h2.notes-menu__title-date {
     cursor: pointer;
 }
 
+.ck.ck-editor__main>.ck-editor__editable:not(.ck-focused) {
+    border: none;
+}
+
 /* #endregion #note_edit */
