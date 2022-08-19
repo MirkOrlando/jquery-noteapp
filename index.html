@@ -6,6 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!--daysJs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.4/dayjs.min.js"
+        integrity="sha512-0fcCRl828lBlrSCa8QJY51mtNqTcHxabaXVLPgw/jPA5Nutujh6CbTdDgRzl9aSPYW/uuE7c4SffFUQFBAy6lg=="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.4/locale/it.min.js"
+        integrity="sha512-phkVsg58Vew4wUU/r26xmmcziH8AaEgdySp+pUdGUQerHGrK1jaqXCDI7/ezobI2jBqu6vMTV0CTwQrKNbEMNw=="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.4/plugin/utc.min.js"
+        integrity="sha512-m00bfmYnAl3plEBlQfeQUhw/U2uvmw29V2+jxSWpAjankMWS+zAsjezbKWDEJNXqWq9o9qQZSOiA2RKDpa4D5w=="
+        crossorigin="anonymous"></script>
+    <!--/daysJs -->
+
     <!-- FontAwesome 6.1.2 CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
         integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
@@ -13,15 +25,17 @@
     <!-- Bootstrap CSS v5.2.0-beta1 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- Handlebars 4.7.7 js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"
+        integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- jQuery JavaScript Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
         integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>window.jQuery || document.write(' <script src="./jquery.js"><\/script>')</script>
-    <!-- Handlebars 4.7.7 js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"
-        integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!--CKEditor-->
+    <script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/ckeditor.js"></script>
     <!-- stylesheet -->
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>NoteApp</title>
@@ -52,17 +66,24 @@
                         </div>
                     </header>
                     <!-- /#header_list -->
+                    <div class="notes_list_main">
+                        <div id="top_main">
+                            <span class="title">titolo</span>
+                            <span class="date">Data Aggiornamento</span>
+                        </div>
+                        <div class="notes_container"></div>
+                    </div>
                 </section>
                 <!-- /section#notes_list -->
 
                 <section id="note_edit" class="col-9 p-0">
                     <header id="header_edit" class="p-3">
                         <div class="actions d-flex justify-content-between align-items-center">
-                            <div class="left_menu d-flex align-items-center gap-3">
-                                <div class="btn_action">
+                            <div class="left_menu d-flex align-items-center">
+                                <div class="btn_action btn_expand pe-3">
                                     <i class="fa-solid fa-up-right-and-down-left-from-center"></i>
                                 </div>
-                                <div class="title_notebook"><i class="fa-solid fa-book"></i> Nome Taccuino</div>
+                                <div class="title_notebook ps-3"><i class="fa-solid fa-book"></i> Nome Taccuino</div>
                             </div>
                             <div class="right-menu d-flex align-items-center gap-3">
                                 <div class="btn_action">
@@ -73,15 +94,15 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="update_date">Ultima modifica: ...</div>
+                        <div class="update_date">Ultima modifica: <span class="date"></span></div>
                     </header>
                     <!-- /header_edit -->
                     <section class="note">
-                        <h5 class="title p-3 m-0">Titolo</h5>
-                        <div class="content p-3"></div>
+                        <input class="title p-3 m-0" value="Titolo">
+                        <div id="editor"></div>
                     </section>
                     <!-- /note -->
-                    <div class="details p-3 d-flex justify-content-between">
+                    <footer class="details p-3 d-flex justify-content-between">
                         <div class="actions d-flex gap-2">
                             <div class="btn_action">
                                 <i class="fa-solid fa-bell"></i>
@@ -93,7 +114,8 @@
                         <div class="status">
                             Tutte le modifiche sono state salvate
                         </div>
-                    </div>
+                    </footer>
+                    <!-- /details -->
                 </section>
                 <!-- /section#note_edit -->
             </div>
@@ -101,7 +123,46 @@
     </main>
     <!-- /main#site_main -->
 
+    <!--Sort-->
+    <div class="dropdown" data-id="sort">
+        <ul class="dropdown__list">
+            <li class="dropdown__list__item active">
+                <a href="#" data-order="asc" class="btn--svg"><img src="images/order.svg" alt=""></a>
+                <a data-sort="updatedAt" class="btn--text" href="#">Data di aggiornamento</a>
+            </li>
+            <li class="dropdown__list__item">
+                <a href="#" data-order="asc" class="btn--svg "><img src="images/order.svg" alt=""></a>
+                <a data-sort="createdAt" class="btn--text" href="#">Data di creazione</a>
+            </li>
+        </ul>
+    </div>
+    <!--/Sort-->
+
+    <!--Filter-->
+    <div class="dropdown" data-id="filter">
+        <ul class="dropdown__list">
+            <li class="dropdown__list__item">Lorem.</li>
+            <li class="dropdown__list__item">Lorem.</li>
+            <li class="dropdown__list__item">Lorem.</li>
+        </ul>
+    </div>
+    <!--Filter-->
+
     <!-- Handlebars template -->
+    <script id="note-year" type="text/x-handlebars-template">
+        <section class="notes-menu__year year{{year}}">
+            <h2 class="notes-menu__title-date">{{year}}</h2>
+            <ul class="notes-menu__list list--none">
+            </ul>
+        </section>
+    </script>
+    <script id="note-list-template" type="text/x-handlebars-template">
+        <li class="notes-menu__list__item" data-id="{{id}}">
+            <h3 class="title">{{title}}</h3>
+            <p class="text">{{text}}</p>
+            <p class="date">{{updatedAt}}</p>
+        </li>
+    </script>
 
     <!-- Bootstrap JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
@@ -111,6 +172,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
         integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
         crossorigin="anonymous"></script>
+
+    <!-- script -->
+    <script src="./assets/js/script.js"></script>
 </body>
 
 </html>
