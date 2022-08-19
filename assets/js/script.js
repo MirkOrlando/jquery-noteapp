@@ -1,3 +1,7 @@
+const ckEditor = {
+    editorInstance: {}
+}
+
 $(document).ready(function () {
     dayjs.locale('it')
     dayjs.extend(window.dayjs_plugin_utc);
@@ -89,6 +93,18 @@ function getNote(id) {
             dateContainer.html(updatedAt)
             const titleContainer = $('#note_edit .note .title');
             titleContainer.val(response.title);
+            const editor = $('#editor');
+            editor.data('id', response.id);
+            editor.html(response.text);
+
+            ClassicEditor
+                .create(editor[0])
+                .catch(error => {
+                    console.error(error);
+                })
+                .then(function (editor) {
+                    ckEditor.editorInstance = editor
+                });
         },
         error: function (error) {
             console.log(error);
