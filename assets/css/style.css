@@ -16,12 +16,12 @@
     border-right: 1px solid var(--secondary);
 }
 
-#notes_list .actions .buttons_action i {
+#notes_list .actions .btns_action .btn_action {
     color: var(--secondary);
     transition: 250ms linear;
 }
 
-#notes_list .actions .buttons_action i:hover {
+#notes_list .actions .btns_action .btn_action:hover {
     color: black;
     cursor: pointer;
 }

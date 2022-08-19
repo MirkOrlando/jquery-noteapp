@@ -33,19 +33,19 @@
     <main id="site_main">
         <div class="container-xxl">
             <div class="row">
-                <section id="notes_list" class="col-3 ">
+                <section id="notes_list" class="col-3 p-3">
                     <header id="header_list">
-                        <h3><i class="fa-solid fa-book"></i> Nome Taccuino</h3>
+                        <h4 class="pb-3" class="title_notebook"><i class="fa-solid fa-book"></i> Nome Taccuino</h4>
                         <div class="actions d-flex justify-content-between">
                             <div class="notes_number">2 Note</div>
-                            <div class="buttons_action d-flex gap-2">
-                                <div class="button">
+                            <div class="btns_action d-flex gap-2">
+                                <div class="btn_action">
                                     <i class="fa-solid fa-arrow-down-wide-short"></i>
                                 </div>
-                                <div class="button">
+                                <div class="btn_action">
                                     <i class="fa-solid fa-table-list"></i>
                                 </div>
-                                <div class="button">
+                                <div class="btn_action">
                                     <i class="fa-solid fa-ellipsis"></i>
                                 </div>
                             </div>
@@ -55,7 +55,26 @@
                 </section>
                 <!-- /section#notes_list -->
 
-                <section id="note_edit" class="col-9"></section>
+                <section id="note_edit" class="col-9">
+                    <header id="header_edit" class="pt-3">
+                        <div class="actions d-flex justify-content-between align-items-center">
+                            <div class="left_menu d-flex align-items-center gap-3">
+                                <div class="btn_action">
+                                    <i class="fa-solid fa-up-right-and-down-left-from-center"></i>
+                                </div>
+                                <div class="title_notebook"><i class="fa-solid fa-book"></i> Nome Taccuino</div>
+                            </div>
+                            <div class="right-menu d-flex align-items-center gap-3">
+                                <div class="btn_action">
+                                    <a class="btn btn-success" href="#" role="button">Condividi</a>
+                                </div>
+                                <div class="btn_action">
+                                    <i class="fa-solid fa-ellipsis"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+                </section>
                 <!-- /section#note_edit -->
             </div>
         </div>
