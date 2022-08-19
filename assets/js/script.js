@@ -70,3 +70,28 @@ function printNotes(data, year) {
         listNotesContainer.append(html)
     })
 }
+
+// get one note and activate
+function activateFirstNote() {
+    const firstNote = $('.notes-menu__year:first-child .notes-menu__list .notes-menu__list__item:first-child');
+    firstNote.addClass('active')
+
+    getNote(firstNote.data('id'))
+}
+
+function getNote(id) {
+    $.ajax({
+        type: "GET",
+        url: `https://62ff4cf39350a1e548db8783.mockapi.io/noteapp/api/v1/notes/${id}`,
+        success: function (response) {
+            const updatedAt = dayjs(response.updatedAt).format('DD MMMM YYYY hh:mm:ss');
+            const dateContainer = $('.update_date .date');
+            dateContainer.html(updatedAt)
+            const titleContainer = $('#note_edit .note .title');
+            titleContainer.val(response.title);
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
+}
