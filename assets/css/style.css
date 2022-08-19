@@ -18,6 +18,10 @@
     border-color: var(--success-hover);
 }
 
+.btn_ellipsis:hover {
+    background-color: var(--bg-primary);
+}
+
 /* #endregion common */
 
 /* #region utilities */
@@ -52,8 +56,18 @@
     border-bottom: 1px solid var(--secondary);
 }
 
+#note_edit #header_edit .actions .btn_ellipsis {
+    aspect-ratio: 1/1;
+    height: 100%;
+}
+
+#note_edit #header_edit .actions .btn_action:hover {
+    color: black;
+    cursor: pointer;
+}
+
 #note_edit .note {
-    height: calc(100% - 95px);
+    height: calc(100% - 95px - 56px);
 }
 
 #note_edit .note .title:hover {
@@ -66,6 +80,16 @@
 
 #note_edit .note .content {
     height: calc(100% - 56px);
+    border-bottom: 1px solid var(--secondary);
+}
+
+#note_edit .details {
+    color: var(--secondary);
+}
+
+#note_edit .details .actions .btn_action:hover {
+    color: black;
+    cursor: pointer;
 }
 
 /* #endregion #note_edit */
