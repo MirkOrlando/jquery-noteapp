@@ -33,9 +33,9 @@
     <main id="site_main">
         <div class="container-xxl">
             <div class="row">
-                <section id="notes_list" class="col-3 p-3">
-                    <header id="header_list">
-                        <h4 class="pb-3" class="title_notebook"><i class="fa-solid fa-book"></i> Nome Taccuino</h4>
+                <section id="notes_list" class="col-3 p-0">
+                    <header id="header_list" class="p-3">
+                        <h4 class="pb-3 m-0" class="title_notebook"><i class="fa-solid fa-book"></i> Nome Taccuino</h4>
                         <div class="actions d-flex justify-content-between">
                             <div class="notes_number">2 Note</div>
                             <div class="btns_action d-flex gap-2">
@@ -55,8 +55,8 @@
                 </section>
                 <!-- /section#notes_list -->
 
-                <section id="note_edit" class="col-9">
-                    <header id="header_edit" class="pt-3">
+                <section id="note_edit" class="col-9 p-0">
+                    <header id="header_edit" class="p-3">
                         <div class="actions d-flex justify-content-between align-items-center">
                             <div class="left_menu d-flex align-items-center gap-3">
                                 <div class="btn_action">
@@ -66,14 +66,19 @@
                             </div>
                             <div class="right-menu d-flex align-items-center gap-3">
                                 <div class="btn_action">
-                                    <a class="btn btn-success" href="#" role="button">Condividi</a>
+                                    <a class="btn btn_success" href="#" role="button">Condividi</a>
                                 </div>
                                 <div class="btn_action">
                                     <i class="fa-solid fa-ellipsis"></i>
                                 </div>
                             </div>
                         </div>
+                        <div class="update_date">Ultima modifica: ...</div>
                     </header>
+                    <section class="note">
+                        <h5 class="title p-3 m-0">Titolo</h5>
+                        <div class="content p-3"></div>
+                    </section>
                 </section>
                 <!-- /section#note_edit -->
             </div>

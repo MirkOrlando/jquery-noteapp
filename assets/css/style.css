@@ -2,6 +2,20 @@
 :root {
     --bg-primary: #f8f8f8;
     --secondary: #a6a6a6;
+    --success: #33ab33;
+    --success-hover: #1b5d1b;
+}
+
+.btn_success {
+    color: white;
+    background-color: var(--success);
+    border-color: var(--success);
+}
+
+.btn_success:hover {
+    color: white;
+    background-color: var(--success-hover);
+    border-color: var(--success-hover);
 }
 
 /* #endregion common */
@@ -16,12 +30,12 @@
     border-right: 1px solid var(--secondary);
 }
 
-#notes_list .actions .btns_action .btn_action {
+#notes_list #header_list .actions .btns_action .btn_action {
     color: var(--secondary);
     transition: 250ms linear;
 }
 
-#notes_list .actions .btns_action .btn_action:hover {
+#notes_list #header_list .actions .btns_action .btn_action:hover {
     color: black;
     cursor: pointer;
 }
@@ -31,6 +45,27 @@
 /* #region #note_edit */
 #note_edit {
     height: 100vh;
+}
+
+#note_edit #header_edit {
+    color: var(--secondary);
+    border-bottom: 1px solid var(--secondary);
+}
+
+#note_edit .note {
+    height: calc(100% - 95px);
+}
+
+#note_edit .note .title:hover {
+    background-color: var(--bg-primary);
+}
+
+#note_edit .note:hover .content {
+    background-color: var(--bg-primary);
+}
+
+#note_edit .note .content {
+    height: calc(100% - 56px);
 }
 
 /* #endregion #note_edit */
