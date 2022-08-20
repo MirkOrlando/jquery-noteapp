@@ -141,6 +141,7 @@ function saveNote(note) {
         data: note,
         url: `https://62ff4cf39350a1e548db8783.mockapi.io/noteapp/api/v1/notes/${note.id}`,
         success: function (response) {
+            updateDate(response.updatedAt)
             updateNoteInMenu(response)
         },
         error: function (error) {
@@ -156,7 +157,6 @@ function updateNoteInMenu(data) {
     $('.notes-menu__list__item.active .title').html(data.title)
     $('.notes-menu__list__item.active .text').text(text)
     $('.notes-menu__list__item.active .date').text(dayjs(data.updatedAt).format('DD MMMM YYYY'))
-    $('.update_date .date').text(dayjs(data.updatedAt).format('DD MMMM YYYY hh:mm:ss'))
 }
 
 function updateNote() {
@@ -171,4 +171,8 @@ function updateNote() {
     timout = setTimeout(function () {
         saveNote(note);
     }, 1000);
+}
+
+function updateDate(date) {
+    $('.update_date .date').text(dayjs(date).format('DD MMMM YYYY hh:mm:ss'))
 }
