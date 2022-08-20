@@ -62,22 +62,11 @@ h2.notes-menu__title-date {
     border-radius: 5px;
 }
 
-.btn--svg i {
-    color: var(--fontColorMenu);
-    fill: var(--fontColorMenu);
-}
-
 .btn--svg:hover i,
 .btn--svg:focus i,
 .btn--svg:active i {
     color: black;
     fill: black;
-}
-
-.btn--svg:hover,
-.btn--svg:focus,
-.btn--svg:active {
-    background-color: var(--btnBgGray);
 }
 
 .btn--svg.rotate {
@@ -129,7 +118,7 @@ h2.notes-menu__title-date {
 }
 
 .dropdown .dropdown__list__item:hover {
-    background-color: var(--bgGray);
+    background-color: #f8f8f8;
 }
 
 .dropdown .dropdown__list__item.active a,
@@ -142,9 +131,6 @@ h2.notes-menu__title-date {
 }
 
 /* #endregion dropdown*/
-
-/* #region utilities */
-/* #endregion utilities */
 
 /* #region #notes_list */
 #notes_list {
@@ -162,10 +148,6 @@ h2.notes-menu__title-date {
 #notes_list #header_list .actions .btns_action .btn_action:hover {
     color: black;
     cursor: pointer;
-}
-
-#notes_list .notes_list_main #top_main {
-    display: none;
 }
 
 #notes_list .notes_list_main {
@@ -191,6 +173,65 @@ h2.notes-menu__title-date {
 
 .notes-menu__list__item .text {
     padding: 1rem 0;
+}
+
+.notes_list_main.list .notes-menu__list__item {
+    display: flex;
+    justify-content: space-between;
+    padding: calc(1.5rem / 2) 1.5rem;
+}
+
+.notes_list_main.list .notes-menu__list__item p.text {
+    display: none;
+}
+
+.notes_list_main.list .notes-menu__list__item .title {
+    font-weight: normal;
+    font-size: 100%;
+    width: 50%;
+}
+
+.notes_list_main.list .notes-menu__list__item .date {
+    padding-left: 10px;
+    width: 50%;
+}
+
+.notes_list_main.list .notes-menu__list__item p.date {
+    color: #333;
+}
+
+.notes_list_main.list .notes-menu__title-date {
+    display: none;
+}
+
+#top_main {
+    display: none;
+}
+
+.notes_list_main.list #top_main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.notes_list_main.list #top_main span {
+    border-right: 1px solid var(--border);
+    border-left: 1px solid var(--border);
+    padding: 5px;
+}
+
+.notes_list_main.list #top_main span {
+    font-size: 80%;
+    width: 50%;
+}
+
+.notes_list_main.list #top_main span.title {
+    padding-left: 1.5rem;
+}
+
+.notes_list_main.list #top_main span.date {
+    padding-right: 1.5rem;
+    padding-left: 10px;
 }
 
 /* #endregion #notes_list */
@@ -227,7 +268,7 @@ h2.notes-menu__title-date {
 
 #note_edit .note .title {
     width: 100%;
-    padding: var(--padding);
+    padding: 1.5rem;
     border: 0;
     font-size: 120%;
     font-weight: bold;

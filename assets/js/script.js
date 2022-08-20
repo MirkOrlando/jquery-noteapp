@@ -83,6 +83,17 @@ $(document).ready(function () {
             $(this).data('order', 'asc').removeClass('rotate');
         }
     })
+
+    //(10) change layout
+    $(document).on('click', '.dropdown[data-id="layout"] li.dropdown__list__item', function (event) {
+        const layout = $(this).data('layout');
+
+        $(this).addClass('active').siblings().removeClass('active');
+
+        $('.notes_list_main').removeClass('fragment list').addClass(layout);
+
+        $(this).parents('.dropdown').removeClass('active')
+    })
 });
 
 // (1) API Ajax
