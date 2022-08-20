@@ -8,7 +8,7 @@ $(document).ready(function () {
     dayjs.locale('it')
     dayjs.extend(window.dayjs_plugin_utc);
 
-    getAllNotes();
+    getAllNotes('updatedAt', 'desc');
 
     // change active note when click on a note
     $(document).on('click', '.notes-menu__list__item', function () {
@@ -32,7 +32,6 @@ $(document).ready(function () {
     })
 
     // dropdown
-
     $(document).on('click', '#filter', function (e) {
         dropdown($(this))
     })
@@ -45,16 +44,55 @@ $(document).ready(function () {
         dropdown($(this))
     })
 
+    // sort order
+    $(document).on('click', '.dropdown[data-id="sort"] a.btn--text', function (e) {
+        e.preventDefault();
+        if (ckEditor.editorInstance.id) {
+            ckEditor.editorInstance.destroy();
+            ckEditor.editorInstance = {};
+        }
+
+        $(this).parent('li').addClass('active').siblings().removeClass('active');
+
+        const sort = $(this).data('sort');
+        const order = $(this).prev('a').data('order')
+        console.log(sort, order);
+
+        getAllNotes(sort, order)
+    })
+
+    $(document).on('click', '.dropdown[data-id="sort"] a.btn--svg', function (e) {
+        e.preventDefault();
+        if (ckEditor.editorInstance.id) {
+            ckEditor.editorInstance.destroy();
+            ckEditor.editorInstance = {};
+        }
+
+        $(this).parent('li').addClass('active').siblings().removeClass('active');
+
+        const sort = $(this).next('a').data('sort');
+        const order = $(this).data('order');
+        console.log(sort, order);
+
+
+        getAllNotes(sort, order);
+
+        if (order === 'asc') {
+            $(this).data('order', 'desc').addClass('rotate');
+        } else if (order === 'desc') {
+            $(this).data('order', 'asc').removeClass('rotate');
+        }
+    })
 });
 
 // (1) API Ajax
-function getAllNotes() {
+function getAllNotes(sort, order) {
     $.ajax({
         type: "GET",
-        url: "https://62ff4cf39350a1e548db8783.mockapi.io/noteapp/api/v1/notes?sortBy=updatedAt&order=desc",
+        url: `https://62ff4cf39350a1e548db8783.mockapi.io/noteapp/api/v1/notes?sortBy=${sort}&order=${order}`,
         success: function (response) {
             if (response.length > 0) {
-                printListNotes(response)
+                printListNotes(response, sort)
             }
         },
         error: function (error) {
@@ -63,16 +101,17 @@ function getAllNotes() {
     });
 }
 
-function printListNotes(data) {
+function printListNotes(data, sort) {
     //Handlebars
     const listYearsContainer = $('#notes_list .notes_list_main .notes_container');
+    listYearsContainer.html('')
     const source = $('#note-year').html();
     const template = Handlebars.compile(source)
 
     //get available years
     const years = [];
     data.forEach(note => {
-        const year = dayjs(note.updatedAt).format('YYYY');
+        const year = dayjs(note[sort]).format('YYYY');
         if (!years.includes(year)) {
             years.push(year)
         }
@@ -84,7 +123,7 @@ function printListNotes(data) {
         listYearsContainer.append(html)
 
         const notesFiltered = data.filter(function (note) {
-            return dayjs(note.updatedAt).format('YYYY')
+            return dayjs(note[sort]).format('YYYY')
                 === year;
         })
 
@@ -123,7 +162,7 @@ function getNote(id) {
         type: "GET",
         url: `https://62ff4cf39350a1e548db8783.mockapi.io/noteapp/api/v1/notes/${id}`,
         success: function (response) {
-            const updatedAt = dayjs(response.updatedAt).format('DD MMMM YYYY hh:mm:ss');
+            const updatedAt = dayjs(response.updatedAt).format('DD MMMM YYYY HH:mm:ss');
             const dateContainer = $('.update_date .date');
             dateContainer.html(updatedAt)
             const titleContainer = $('#note_edit .note .title');
@@ -188,7 +227,7 @@ function updateNote() {
 }
 
 function updateDate(date) {
-    $('.update_date .date').text(dayjs(date).format('DD MMMM YYYY hh:mm:ss'))
+    $('.update_date .date').text(dayjs(date).format('DD MMMM YYYY HH:mm:ss'))
 }
 
 function dropdown(element) {
