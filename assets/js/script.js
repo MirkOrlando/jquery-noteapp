@@ -31,6 +31,20 @@ $(document).ready(function () {
         updateNote()
     })
 
+    // dropdown
+
+    $(document).on('click', '#filter', function (e) {
+        dropdown($(this))
+    })
+
+    $(document).on('click', '#sort', function (e) {
+        dropdown($(this))
+    })
+
+    $(document).on('click', '#layout', function (e) {
+        dropdown($(this))
+    })
+
 });
 
 // (1) API Ajax
@@ -175,4 +189,16 @@ function updateNote() {
 
 function updateDate(date) {
     $('.update_date .date').text(dayjs(date).format('DD MMMM YYYY hh:mm:ss'))
+}
+
+function dropdown(element) {
+    const offset = element.offset();
+    const height = element.height();
+
+    const id = element.attr('id');
+    const dropdown = $(`.dropdown[data-id="${id}"`);
+
+    dropdown.siblings().removeClass('active');
+
+    dropdown.toggleClass('active').css({ top: offset.top + height, left: offset.left });
 }

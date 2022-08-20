@@ -4,6 +4,7 @@
     --bg-secondary: #d2d2d2;
     --primary: #a6a6a6;
     --secondary: #636363;
+    --active-color: #026FAC;
     --success: #33ab33;
     --success-hover: #1b5d1b;
 }
@@ -33,6 +34,10 @@ p {
     border-color: var(--success-hover);
 }
 
+h3 {
+    margin: 0;
+}
+
 .btn_ellipsis:hover {
     background-color: var(--bg-primary);
 }
@@ -60,7 +65,7 @@ h2.notes-menu__title-date {
     top: 0;
     left: 0;
     display: none;
-    width: 200px;
+    min-width: 200px;
     border: 1px solid lightgray;
     border-radius: 3px;
     background-color: white;
@@ -73,9 +78,9 @@ h2.notes-menu__title-date {
 
 .dropdown__title {
     text-transform: uppercase;
-    padding: var(--padding);
+    padding: 1.5rem;
     font-size: 80%;
-    color: var(--fontColorMenu);
+    color: var(--primary);
 }
 
 .dropdown .dropdown__list {
@@ -92,7 +97,7 @@ h2.notes-menu__title-date {
 .dropdown .dropdown__list__item a {
     margin-left: 5px;
     text-decoration: none;
-    color: var(--fontColorMenu);
+    color: var(--primary);
 }
 
 .dropdown .dropdown__list__item:hover {
