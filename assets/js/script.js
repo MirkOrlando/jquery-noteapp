@@ -207,6 +207,10 @@ function saveNote(note) {
         success: function (response) {
             updateDate(response.updatedAt)
             updateNoteInMenu(response)
+
+            // message saved add
+            const footerMessageContainer = $('footer.details .status').html('Tutte le modifiche sono state salvate');
+
         },
         error: function (error) {
             console.log(error);
@@ -224,6 +228,9 @@ function updateNoteInMenu(data) {
 }
 
 function updateNote() {
+    // message saved add
+    const footerMessageContainer = $('footer.details .status').html('...');
+
     const note = {
         id: $('#editor').data('id'),
         text: $('#note_edit .note .ck-editor__main .ck-content').html(),
